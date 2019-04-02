@@ -3,7 +3,7 @@
 import os
 from datetime import datetime
 import unittest
-from utils.func import get_github, get_sender, get_receivers, send_email
+from utils.func import get_github, get_sender, get_receivers, send_email, BASE_DIR
 
 
 class GithubTestCase(unittest.TestCase):
@@ -26,7 +26,7 @@ class GithubTestCase(unittest.TestCase):
         self.assertEqual(repo.name, reponame)
 
     def test_commit(self):
-        test_file = 'text.txt'
+        test_file = f"{BASE_DIR}/test/text.txt"
         with open(test_file, 'a+') as f:
             date = datetime.now()
             content = date.strftime('%Y-%m-%d %I:%M:%S %p')

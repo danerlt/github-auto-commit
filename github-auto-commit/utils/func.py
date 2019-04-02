@@ -8,7 +8,10 @@ from datetime import datetime
 from email.mime.text import MIMEText
 
 
-def get_config(file="../config/auth.json"):
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
+
+
+def get_config(file=f"{BASE_DIR}/config/auth.json"):
     if os.path.isfile(file):
         with open(file, "r") as f:
             data = json.load(f)
@@ -47,8 +50,8 @@ def get_sender():
         data = get_config()
         sender = data.get("sender")
     except Exception as e:
-        print(f"get by user and password error:{e}")
-        raise Exception("your user and password is error, check your config")
+        print(f"get sender error:{e}")
+        raise Exception("your sender is error, check your config")
     else:
         return sender
 
@@ -87,15 +90,18 @@ def send_email(host=None, username=None, password=None, email='', receivers=[], 
         smtpObj.sendmail(email, receivers, message.as_string())  # 发送
         print("mail has been send successfully.")
     except smtplib.SMTPException as e:
-        print(e)
+        print(f"send mail error:{e}")
 
 
-def git_commit_and_push(file='text.txt'):
+def git_commit(file=f'{BASE_DIR}/test/text.txt'):
     with open(file, 'a+') as f:
         date = datetime.now()
         content = date.strftime('%Y-%m-%d %I:%M:%S %p')
-        f.write(content)
+        f.write(f"\n{content}\n")
         os.system(f"git add {file}")
         comment = f'update text.txt append {content}'
         os.system(f'git commit -m "{comment}"')
-        os.system('git push origin master')
+
+
+def git_push():
+        os.system("git push origin master")
