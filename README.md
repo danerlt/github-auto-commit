@@ -79,5 +79,10 @@ cd github-auto-commit
 python main.py
 ```
 
+每天定时提交
+```
+cd github-auto-commit
+python task.py
+```
 ## 5.错误情况
 如果发送邮件提示554错误，将发件人的邮箱添加到receivers即可解决
