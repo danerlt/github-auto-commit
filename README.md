@@ -84,5 +84,13 @@ python main.py
 cd github-auto-commit
 python task.py
 ```
+后台运行:
+```shell
+nohup python -u task.py > /var/log/auto-commit.log 2>&1 &
+```
+最后的&表示后台运行 
+2 输出错误信息到提示符窗口 
+1 表示输出信息到提示符窗口, 1前面的&注意添加, 否则还会创建一个名为1的文件 
+最后会把日志文件输出到`/var/log/auto-commit.log`文件
 ## 5.错误情况
 如果发送邮件提示554错误，将发件人的邮箱添加到receivers即可解决
